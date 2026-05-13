@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "import-downloads",
   "title": "Import Downloads",
-  "description": "Move the most recently downloaded batch of files into the selected Finder folder.",
+  "description": "Move recent downloads into a Finder folder. Includes a quick batch importer, a checkbox-based picker, and an Open Latest Download companion.",
   "icon": "icon.png",
   "author": "Fredrik-psd",
   "license": "MIT",
@@ -22,8 +22,103 @@
         "finder",
         "downloads",
         "import",
-        "move"
+        "move",
+        "batch"
       ]
+    },
+    {
+      "name": "pick-downloads",
+      "title": "Pick Downloads to Import",
+      "description": "Choose which recent downloads to import into the selected Finder folder",
+      "mode": "view",
+      "keywords": [
+        "finder",
+        "downloads",
+        "import",
+        "choose",
+        "pick"
+      ]
+    },
+    {
+      "name": "open-latest-download",
+      "title": "Open Latest Download",
+      "description": "Reveal the most recently downloaded file in Finder",
+      "mode": "no-view",
+      "keywords": [
+        "finder",
+        "downloads",
+        "open",
+        "latest",
+        "reveal"
+      ]
+    },
+    {
+      "name": "undo-import",
+      "title": "Undo Last Import",
+      "description": "Move the most recently imported files back to where they came from",
+      "mode": "no-view",
+      "keywords": [
+        "undo",
+        "import",
+        "restore"
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "downloadsFolder",
+      "type": "directory",
+      "required": false,
+      "title": "Downloads Folder",
+      "description": "Folder to import files from. Defaults to ~/Downloads.",
+      "default": ""
+    },
+    {
+      "name": "batchGapSeconds",
+      "type": "textfield",
+      "required": false,
+      "title": "Batch Gap (seconds)",
+      "description": "Files downloaded within this many seconds of the most recent are part of the batch.",
+      "default": "60"
+    },
+    {
+      "name": "conflictPolicy",
+      "type": "dropdown",
+      "required": false,
+      "title": "On Filename Conflict",
+      "description": "What to do when a file with the same name already exists in the destination.",
+      "default": "abort",
+      "data": [
+        {
+          "title": "Abort the whole import",
+          "value": "abort"
+        },
+        {
+          "title": "Skip the conflicting file",
+          "value": "skip"
+        },
+        {
+          "title": "Rename with (1), (2), …",
+          "value": "rename"
+        }
+      ]
+    },
+    {
+      "name": "dateSubfolder",
+      "type": "checkbox",
+      "required": false,
+      "title": "Date Subfolder",
+      "label": "Move into a YYYY-MM-DD subfolder inside the destination",
+      "description": "If on, the import creates a dated subfolder in the destination and moves files there.",
+      "default": false
+    },
+    {
+      "name": "finderTag",
+      "type": "textfield",
+      "required": false,
+      "title": "Finder Tag",
+      "description": "Optional Finder tag colour or name to apply to imported files (e.g. \"Blue\", \"Receipt\"). Leave empty to skip.",
+      "default": ""
     }
   ],
   "dependencies": {

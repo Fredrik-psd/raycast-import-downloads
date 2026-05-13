@@ -1,20 +1,27 @@
 # Import Downloads
 
-A Raycast extension that moves your most recent downloads into a Finder folder in one step.
+A Raycast extension that moves recent downloads into a Finder folder.
 
-## What it does
+## Commands
 
-Run the **Import Downloads** command and it will:
+- **Import Downloads** — fastest path. Detects the latest batch of files in `~/Downloads` (anything within the batch-gap window of the most recent file) and moves it into the destination folder.
+- **Pick Downloads to Import** — opens a checkbox list of recent downloads with file sizes and ages so you can choose exactly which to import.
+- **Open Latest Download** — reveals the most recently downloaded file in Finder.
+- **Undo Last Import** — moves the most recently imported files back to where they came from.
 
-1. Pick a destination folder — either the folder selected in Finder, or the folder of the front Finder window if nothing is selected.
-2. Find the most recently downloaded files in `~/Downloads`. Files created within a one-minute gap of each other are treated as a single "batch".
-3. Move the entire batch into the destination folder.
+## Choosing the destination
 
-If a file in the batch would overwrite something with the same name in the destination, the command aborts without moving anything.
+- If a single folder is selected in Finder → that's the destination.
+- Otherwise the destination is the folder shown in the front Finder window.
 
-## Usage
+## Preferences
 
-1. In Finder, either select a folder or open a Finder window pointing at the folder you want to import into.
-2. Run **Import Downloads** from Raycast.
+- **Downloads Folder** — where to look for files. Defaults to `~/Downloads`.
+- **Batch Gap (seconds)** — files downloaded within this many seconds of the most recent are part of the batch. Defaults to 60.
+- **On Filename Conflict** — abort the whole import, skip the conflicting file, or auto-rename with `(1)`, `(2)`, …
+- **Date Subfolder** — when on, files are moved into a `YYYY-MM-DD` subfolder inside the destination.
+- **Finder Tag** — when set, imported files are tagged in Finder with the given colour or label.
 
-A success HUD shows how many files were moved.
+## In-progress download safety
+
+Browser temp files (`*.crdownload`, `*.download`, `*.part`, `*.partial`, `*.filepart`, `*.aria2`) are ignored so a file that's still being downloaded can't be moved by mistake.
